@@ -1,0 +1,22 @@
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> l=new ArrayList<>();
+        //List<Integer> a=new ArrayList<>();
+        Arrays.sort(candidates);
+        combinations(0,candidates,target,l,new ArrayList<>());
+        return l; 
+    }
+    static void combinations(int i,int[] candidates,int target,List<List<Integer>> l,List<Integer> a){
+        if(target==0){
+            l.add(new ArrayList<>(a));
+            return;
+        }
+        for(int j=i;j<candidates.length;j++){
+            if(j>i && candidates[j]==candidates[j-1]) continue;
+            if(candidates[j]>target) break;
+            a.add(candidates[j]);
+            combinations(j+1,candidates,target-candidates[j],l,a);
+            a.remove(a.size()-1);
+        }
+    }
+}
