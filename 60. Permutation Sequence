@@ -1,0 +1,21 @@
+class Solution {
+    public String getPermutation(int n, int k) {
+        String s="";
+        for(int i=1;i<=n;i++){
+            s+=i;
+        }
+        List<String> l= new ArrayList<>();
+        kthPer(l,s,"");
+        return l.get(k-1);
+    }
+    public static void kthPer(List<String> l,String s,String ans){
+        if(s.length()==0){
+            l.add(ans);
+        }
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            String sa=s.substring(0,i)+s.substring(i+1,s.length());
+            kthPer(l,sa,ans+ch);
+        }
+    }
+}
